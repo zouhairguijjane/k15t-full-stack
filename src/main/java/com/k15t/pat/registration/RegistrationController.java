@@ -15,7 +15,6 @@ public class RegistrationController {
 
     @Autowired private VelocityEngine velocityEngine;
 
-
     @RequestMapping("/registration.html")
     public String registration() {
 

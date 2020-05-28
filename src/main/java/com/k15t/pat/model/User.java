@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
+@Entity
 public class User {
 
     @Id
@@ -26,6 +28,7 @@ public class User {
     @Size(min = 2, max = 200, message
             = "Name must be between 2 and 64 characters")
     @NotEmpty(message = "Please fill in your name")
+    @Pattern(regexp = "^[A-Za-z\\s]+[.]?[A-Za-z\\s]*$", message = "Name must contain only letters (White space is allowed)")
     private String name;
 
     @NotEmpty(message = "Please fill in your email")

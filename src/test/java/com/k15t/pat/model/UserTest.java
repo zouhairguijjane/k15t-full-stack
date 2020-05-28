@@ -1,6 +1,5 @@
-package model;
+package com.k15t.pat.model;
 
-import com.k15t.pat.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +26,7 @@ class UserTest {
     }
 
     @Test
-    public void createNewUser() {
+    void createNewUser() {
         User user = User.builder()
                 .name(NAME)
                 .email(EMAIL)
@@ -52,6 +51,22 @@ class UserTest {
         Set<ConstraintViolation<User>> violations = validator.validate(user);
 
         assertThat(violations.iterator().next().getMessage()).isEqualTo("Name must be between 2 and 64 characters");
+    }
+
+    @Test
+    void createUserWithDigitsInName() {
+        User user = User.builder()
+                .name("Zouhair 1")
+                .email(EMAIL)
+                .address(PARIS)
+                .password(PASSWORD)
+                .build();
+
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
+
+        assertThat(violations.iterator()
+                .next()
+                .getMessage()).isEqualTo("Name must contains only letters (White space is allowed)");
     }
 
     @Test

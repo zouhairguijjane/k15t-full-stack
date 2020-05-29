@@ -66,7 +66,7 @@ class UserTest {
 
         assertThat(violations.iterator()
                 .next()
-                .getMessage()).isEqualTo("Name must contains only letters (White space is allowed)");
+                .getMessage()).isEqualTo("Name must contain only letters (White space is allowed)");
     }
 
     @Test

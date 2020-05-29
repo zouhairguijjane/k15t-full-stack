@@ -58,7 +58,7 @@ public class UserRegistrationServiceTest {
         given(userRepository.findByEmailIgnoreCase(user.getEmail())).willReturn(Optional.of(user));
 
         assertThatThrownBy(() -> userRegistrationService.create(user)).isInstanceOf(Exception.class)
-                .hasMessageContaining("User already exists with the email address:");
+                .hasMessageContaining("User already exist with the email address:");
 
         verify(userRepository, never()).save(any(User.class));
     }

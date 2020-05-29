@@ -5,17 +5,19 @@ import com.k15t.pat.model.User;
 import com.k15t.pat.service.UserRegistrationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
-@RestController
+@Controller
 public class UserRegistrationController {
     private final UserRegistrationService userRegistrationService;
 
@@ -23,8 +25,13 @@ public class UserRegistrationController {
         this.userRegistrationService = userRegistrationService;
     }
 
+    @GetMapping("/registration.html")
+    public String registration() {
+        return "registration";
+    }
+
     @PostMapping("/registration")
-    public ResponseEntity<Object> newRegistrationApi(@Valid @RequestBody User user, BindingResult bindingResult) {
+    public ResponseEntity<Object> registration(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             final Set<String> errors = new HashSet<>();
             for (final FieldError error : bindingResult.getFieldErrors()) {

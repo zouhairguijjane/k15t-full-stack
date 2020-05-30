@@ -45,8 +45,9 @@
                                 <div class="col-lg-9">
                                     <input class="form-control" type="text" id="name" name="name"
                                            placeholder="Zouhair Guijjane" required autofocus>
-                                    <small class="form-text text-muted text-center">
-                                        Only letters are allowed
+                                    <small th:if="${#fields.hasErrors('name')}"
+                                           class="form-text text-danger text-center" th:errors="*{name}">
+                                        Input is incorrect
                                     </small>
                                 </div>
                             </div>
@@ -55,6 +56,10 @@
                                 <div class="col-lg-9">
                                     <input class="form-control" type="password" id="password" name="password"
                                            placeholder="Password" required>
+                                    <small th:if="${#fields.hasErrors('password')}"
+                                           class="form-text text-danger text-center" th:errors="*{password}">
+                                        Input is incorrect
+                                    </small>
                                     <small class="form-text text-muted text-center">
                                         At least 8 characters
                                     </small>
@@ -66,6 +71,10 @@
                                     <input class="form-control" type="email" id="email" name="email"
                                            placeholder="example@test.com"
                                            required>
+                                    <small th:if="${#fields.hasErrors('email')}"
+                                           class="form-text text-danger text-center" th:errors="*{email}">
+                                        Input is incorrect
+                                    </small>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -74,6 +83,10 @@
                                 <div class="col-lg-9">
                                     <input class="form-control" type="text" id="address" name="address"
                                            placeholder="Ostendstraße 110, 70188 Stuttgart" required>
+                                    <small th:if="${#fields.hasErrors('address')}"
+                                           class="form-text text-danger text-center" th:errors="*{address}">
+                                        Input is incorrect
+                                    </small>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -82,6 +95,10 @@
                                 <div class="col-lg-9">
                                     <input class="form-control" type="tel" id="phoneNumber" name="phoneNumber"
                                            placeholder="+33612345678">
+                                    <small th:if="${#fields.hasErrors('phoneNumber')}"
+                                           class="form-text text-danger text-center" th:errors="*{phoneNumber}">
+                                        Input is incorrect
+                                    </small>
                                     <small class="form-text text-muted text-center">
                                         Optional
                                     </small>

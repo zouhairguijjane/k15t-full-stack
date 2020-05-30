@@ -50,7 +50,7 @@ public class User {
     @Column
     private String password;
 
-    @Pattern(regexp = "^[+]?[0-9]{1,4}[-\\s./0-9]*$", message = "Phone number should be like: +33612345678 or +33-6-12-34-56-78")
+    @Pattern(regexp = "^$|^[+]?[0-9]{1,4}[-\\s./0-9]*$", message = "Phone number should be like: +33612345678 or +33-6-12-34-56-78")
     @Column
     private String phoneNumber;
 }

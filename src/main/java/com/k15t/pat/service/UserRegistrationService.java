@@ -6,6 +6,8 @@ import com.k15t.pat.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class UserRegistrationService {
@@ -26,6 +28,10 @@ public class UserRegistrationService {
 
         log.info("A new user is saved with the email address: {}", user.getEmail());
         return userRepository.save(user);
+    }
+
+    public List<User> getAllRegisteredUsers() {
+        return userRepository.findAll();
     }
 
     private boolean isUserAlreadyExisting(String userEmail) {

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -36,6 +37,13 @@ public class UserRegistrationController {
     @GetMapping("/")
     public String index() {
         return "redirect:/registration.html";
+    }
+
+    @GetMapping("/participants.html")
+    public String users(Model model) {
+        List<User> allRegisteredUsers = userRegistrationService.getAllRegisteredUsers();
+        model.addAttribute("allRegisteredUsers", allRegisteredUsers);
+        return "participants";
     }
 
     @PostMapping("/rest/registration")

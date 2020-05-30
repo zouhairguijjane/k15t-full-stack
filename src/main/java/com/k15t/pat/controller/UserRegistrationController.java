@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -19,6 +20,7 @@ import java.util.Set;
 
 @Controller
 public class UserRegistrationController {
+    public static final String REGISTRATION_PAGE = "registration";
     private final UserRegistrationService userRegistrationService;
 
     public UserRegistrationController(UserRegistrationService userRegistrationService) {
@@ -26,12 +28,34 @@ public class UserRegistrationController {
     }
 
     @GetMapping("/registration.html")
-    public String registration() {
-        return "registration";
+    public String registration(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+        model.addAttribute("user", new User());
+        return REGISTRATION_PAGE;
     }
 
-    @PostMapping("/registration")
-    public ResponseEntity<Object> registration(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/registration.html";
+    }
+
+    @PostMapping("/rest/registration")
+    public String newRegistration(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return REGISTRATION_PAGE;
+        } else {
+            try {
+                userRegistrationService.create(user);
+                model.addAttribute("success", true);
+                return REGISTRATION_PAGE;
+            } catch (UserAlreadyExistException e) {
+                model.addAttribute("user_already_exist", e.getMessage());
+                return REGISTRATION_PAGE;
+            }
+        }
+    }
+
+    @PostMapping("/api/registration")
+    public ResponseEntity<Object> registration(@Valid @RequestBody User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             final Set<String> errors = new HashSet<>();
             for (final FieldError error : bindingResult.getFieldErrors()) {
@@ -47,5 +71,4 @@ public class UserRegistrationController {
             }
         }
     }
-
 }

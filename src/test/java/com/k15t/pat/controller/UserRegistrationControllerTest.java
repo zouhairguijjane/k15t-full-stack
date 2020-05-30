@@ -35,7 +35,7 @@ public class UserRegistrationControllerTest {
                 .password("12345678")
                 .build();
 
-        MvcResult response = mockMvc.perform(post("/registration")
+        MvcResult response = mockMvc.perform(post("/api/registration")
                 .content(objectMapper.writeValueAsString(user))
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON))

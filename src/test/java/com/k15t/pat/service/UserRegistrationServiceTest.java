@@ -9,8 +9,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.List;
 import java.util.Optional;
 
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
@@ -61,5 +63,34 @@ public class UserRegistrationServiceTest {
                 .hasMessageContaining("User already exist with the email address:");
 
         verify(userRepository, never()).save(any(User.class));
+    }
+
+    @Test
+    public void listAllUsers() {
+        User zouhair = User.builder()
+                .id(1L)
+                .name("Zouhair")
+                .email("zouhair@test.com")
+                .address("Paris")
+                .password("1234546789")
+                .phoneNumber("+33612345678")
+                .build();
+
+        User salma = User.builder()
+                .id(2L)
+                .name("Salma")
+                .email("salma@test.com")
+                .address("Ffm")
+                .password("1234546789")
+                .phoneNumber("+33612345678")
+                .build();
+
+        List<User> users = asList(zouhair, salma);
+
+        when(userRegistrationService.getAllRegisteredUsers()).thenReturn(asList(zouhair, salma));
+
+        List<User> allRegisteredUsers = userRegistrationService.getAllRegisteredUsers();
+
+        assertThat(allRegisteredUsers).containsExactlyInAnyOrderElementsOf(users);
     }
 }

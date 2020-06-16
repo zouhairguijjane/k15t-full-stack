@@ -144,14 +144,14 @@ The application will start on port 8080: http://localhost:8080
 
 ### Improvements
 
-- Avoid links for JQuery and Bootstrap, instead download them on local.
-- Add a Creation Date column for every user.
-- Run application with Docker-compose.
-- Cancel participants from attending the meetup for admins.
-- Hash the password using Spring Security (BCryptPasswordEncoder will generate the salt for us internally)
-- Add End-To-End tests
-- Add CI/CD
-- Run JaCoCo code coverage and fail the build if desired percentage is not met
-- Run SonarQube code quality checks
-- Build Docker image and publish it to Docker Hub
-- Deploy application on some free cloud hosting service like Heroku or OpenShift
+- [ ] Avoid links for JQuery and Bootstrap, instead download them on local.
+- [X] Add a Creation Date column for every user.
+- [ ] Run application with Docker-compose.
+- [ ] Cancel participants from attending the meetup for admins.
+- [ ] Hash the password using Spring Security (BCryptPasswordEncoder will generate the salt for us internally)
+- [ ] Add End-To-End tests
+- [ ] Add CI/CD
+- [ ] Run JaCoCo code coverage and fail the build if desired percentage is not met
+- [ ] Run SonarQube code quality checks
+- [ ] Build Docker image and publish it to Docker Hub
+- [ ] Deploy application on some free cloud hosting service like Heroku or OpenShift

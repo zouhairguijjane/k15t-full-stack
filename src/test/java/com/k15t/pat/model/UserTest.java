@@ -7,6 +7,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -179,5 +180,18 @@ class UserTest {
         assertThat(violations.iterator()
                 .next()
                 .getMessage()).isEqualTo("Phone number should be like: +33612345678 or +33-6-12-34-56-78");
+    }
+
+    @Test
+    void createNewUserWithCreatedDateTime() {
+        User user = User.builder()
+                .name(NAME)
+                .email(EMAIL)
+                .address(PARIS)
+                .password(PASSWORD)
+                .createdAt(LocalDateTime.of(2020, 6, 16, 17, 14))
+                .build();
+
+        assertThat(user.getCreatedAt()).isNotNull();
     }
 }
